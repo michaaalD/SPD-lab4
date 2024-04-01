@@ -2,6 +2,16 @@
 #include<fstream>
 #include <string>
 
+
+
+/**
+ * @brief struktura zadania
+ *  ID Numer identyfikacyjny zadania
+    r: Czas pojawienia się zadania 
+    p: Czas przetwarzania zadania
+    q: Termin wykonania zadania
+ * 
+ */
 struct task
 {
   public:
@@ -11,6 +21,12 @@ struct task
     int q;
 };
 
+/**
+ * @brief funkcja zamienia miejscami pola dwoch obiektow typu task
+ * 
+ * @param a zadanie a
+ * @param b zadanie b
+ */
 void task_swap(task& a, task& b)
 {
   std::swap(a.ID, b.ID);
@@ -19,7 +35,14 @@ void task_swap(task& a, task& b)
   std::swap(a.r, b.r);
 }
 
-
+/**
+ * @brief Implementuje algorytm Schrage
+ * 
+ * @param n liczba zadan
+ * @param T tablica zadan 
+ * @param X tablica kolejnosci
+ * @return int cmax
+ */
 int schrage(int n, task* T, int* X)
 {
   int ND[100], D[100];							//ND - tablica zadań niedostępnych  D - tablica zadań dostępnych
@@ -74,6 +97,15 @@ int schrage(int n, task* T, int* X)
   }
   return cmax;
 }
+
+
+/**
+ * @brief 
+ * 
+ * @param n 
+ * @param T 
+ * @return int 
+ */
 int schrage_divide(int n, task* T)
 {
   int ND[100];
@@ -103,11 +135,11 @@ int schrage_divide(int n, task* T)
       }
     }
   }
-  while (nd != 0 || d != 0)
+  while (nd != 0 || d != 0)  
   {
-    if (nd != 0)
+    if (nd != 0) // dopoki sa dostepne zadania
     {
-      if (T[ND[nd-1]].r <= t)
+      if (T[ND[nd-1]].r <= t) // sprawdza czy mozna zaplanowac zadanie
       {
         D[d] = ND[nd - 1];
         d++;
